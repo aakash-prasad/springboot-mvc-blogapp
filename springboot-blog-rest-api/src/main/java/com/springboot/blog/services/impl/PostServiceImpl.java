@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -95,6 +96,7 @@ public class PostServiceImpl implements PostService {
         post.setTitle(postDto.getTitle());
         post.setContent(postDto.getContent());
         post.setDescription(postDto.getDescription());
+
         return post;
     }
 }
