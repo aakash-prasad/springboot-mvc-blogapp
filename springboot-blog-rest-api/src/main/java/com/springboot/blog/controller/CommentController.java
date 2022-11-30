@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,8 @@ public class CommentController {
         this.commentService = commentService;
     }
     @PostMapping("/posts/{postId}/comments")
-    public ResponseEntity<CommentsDto> createComment(@PathVariable int postId, @RequestBody CommentsDto commentsDto){
+    public ResponseEntity<CommentsDto> createComment(@PathVariable int postId,
+                                                     @Valid @RequestBody CommentsDto commentsDto){
         return new ResponseEntity<>(commentService.createComment(postId, commentsDto), HttpStatus.CREATED);
     }
     // Method to get all posts
@@ -37,7 +39,7 @@ public class CommentController {
     @PutMapping("/posts/{postId}/comments/{id}")
     public ResponseEntity<CommentsDto> updateCommentsById(@PathVariable(value = "postId") long postId,
                                                          @PathVariable(value = "id") int commentId,
-                                                          @RequestBody   CommentsDto commentRequest) {
+                                                          @Valid @RequestBody   CommentsDto commentRequest) {
         CommentsDto updatedComment = commentService.updateCommentById(postId, commentId, commentRequest);
         return new ResponseEntity<>(updatedComment, HttpStatus.OK);
     }
